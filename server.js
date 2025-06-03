@@ -4,19 +4,23 @@ const bodyParser = require('body-parser');
 const { handleChatStream } = require('./routes/chat');
 
 const app = express();
+
+// Railway 指定 PORT 或 fallback
 const port = process.env.PORT || 8080;
 
+// ✅ 中間件
 app.use(cors());
 app.use(bodyParser.json());
 
-// Health check endpoint
+// ✅ Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.status(200).json({ status: 'ok' });
 });
 
-// Main chat route
+// ✅ Chat API endpoint
 app.post('/api/chat/stream', handleChatStream);
 
-app.listen(port, () => {
-  console.log(`Mentor Proxy server running on port ${port}`);
+// ✅ 啟動伺服器
+app.listen(port, '0.0.0.0', () => {
+  console.log(`✅ Mentor Proxy server running on port ${port}`);
 });
