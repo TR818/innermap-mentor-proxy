@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { handleChatStream } = require('./routes/chat');
 
 const app = express();
-const port = process.env.PORT || 8080; // Railway 默認使用 8080
+const port = process.env.PORT || 8080;  // 注意 Railway 預設是 8080
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -14,7 +14,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-// ✅ Chat streaming endpoint
+// ✅ Main chat endpoint
 app.post('/api/chat/stream', handleChatStream);
 
 // ✅ Start server
